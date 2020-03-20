@@ -1,9 +1,12 @@
-#ifndef __PY_STRING
-#define __PY_STRING
+#ifndef __UTILS_STRING__
+#define __UTILS_STRING__
+
+#include "base.h"
 
 #include <string.h>
 #include <string>
-using string = std::string;
+using std::string;
+using str = std::string;
 
 /*-----------------------------------------------------------------*\
     PyString
@@ -23,19 +26,15 @@ using namespace pystring;
 \*-----------------------------------------------------------------*/
 #include <stdio.h>
 #include <iostream>
-// using cout = std::cout;
-// using endl = std::endl;
+using std::cout;
+using std::endl;
 
 /*-----------------------------------------------------------------*\
     println
 \*-----------------------------------------------------------------*/
 #include <stdarg.h>
 
-// #define println(...) printf(__VA_ARGS__);printf("\n")
-#define println(fmt, ...) printf(fmt"\n", ##__VA_ARGS__)
-#define debug(fmt, ...) printf("[DEBUG] " __FILE__"::%s:%d --> " fmt"\n", __FUNCTION__, __LINE__ , ##__VA_ARGS__)
-
-void print(const char *format, ...)
+void println(const char *format, ...)
 {
     // printf("%s %s ", __DATE__, __TIME__);
     va_list args;
@@ -45,4 +44,4 @@ void print(const char *format, ...)
     printf("\n");
 }
 
-#endif  // __PY_STRING
+#endif  // __UTILS_STRING__

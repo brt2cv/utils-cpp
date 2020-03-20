@@ -1,4 +1,5 @@
-// https://github.com/kjsce-codecell/standard-library-in-x/tree/master/cpp/containers
+#ifndef __UTILS_CONTAINER__
+#define __UTILS_CONTAINER__
 
 /*-----------------------------------------------------------------*\
     Array
@@ -96,3 +97,5 @@ using Stack = std::stack<Args>;
 /*-----------------------------------------------------------------*\
     Bitsets
 \*-----------------------------------------------------------------*/
+
+#endif  // __UTILS_CONTAINER__
