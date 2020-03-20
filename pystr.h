@@ -1,8 +1,6 @@
 #ifndef __UTILS_STRING__
 #define __UTILS_STRING__
 
-#include "base.h"
-
 #include <string.h>
 #include <string>
 using std::string;
@@ -33,6 +31,10 @@ using std::endl;
     println
 \*-----------------------------------------------------------------*/
 #include <stdarg.h>
+
+// #define print(...) printf(__VA_ARGS__);printf("\n")
+#define print(fmt, ...) printf(fmt"\n", ##__VA_ARGS__)
+#define debug(fmt, ...) printf("[DEBUG] " __FILE__"::%s:%d --> " fmt"\n", __FUNCTION__, __LINE__ , ##__VA_ARGS__)
 
 void println(const char *format, ...)
 {
