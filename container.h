@@ -71,6 +71,12 @@ using Map = std::map<Arg1, Arg2>;
 template <typename Arg1, typename Arg2>
 using Multimap = std::multimap<Arg1, Arg2>;
 
+template <typename Arg1, typename Arg2>
+bool in_dict(std::map<Arg1, Arg2> d, Arg1 map_key){
+    // return 1 == d.count(map_key);
+    return d.find(map_key) != d.end();
+}
+
 /*-----------------------------------------------------------------*\
     Queue
 \*-----------------------------------------------------------------*/

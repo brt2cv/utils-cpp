@@ -38,23 +38,25 @@ int chdir(const string path){
     return ::chdir(path.c_str());
 }
 
-// void _listdir(string path_dir, std::vector<string>& files){
-//     intptr_t hFile = 0;
-//     _finddata_t fileinfo;
-//     if ((hFile = _findfirst(path_dir.append("/*").c_str(), &fileinfo)) != -1) {
-//         while (_findnext(hFile, &fileinfo) == 0) {
-//             if (strcmp(fileinfo.name, ".."))
-//                 files.push_back(fileinfo.name);
-//         }
-//         _findclose(hFile);
-//     }
-// }
+/* #include <windows.h>
 
-// std::vector<string> listdir(string path_dir){
-//     std::vector<string> vec_files;
-//     _listdir(path_dir, vec_files);
-//     return vec_files;
-// }
+void _listdir(string path_dir, std::vector<string>& files){
+    intptr_t hFile = 0;
+    _finddata_t fileinfo;
+    if ((hFile = _findfirst(path_dir.append("/*").c_str(), &fileinfo)) != -1) {
+        while (_findnext(hFile, &fileinfo) == 0) {
+            if (strcmp(fileinfo.name, ".."))
+                files.push_back(fileinfo.name);
+        }
+        _findclose(hFile);
+    }
+}
+
+std::vector<string> listdir(string path_dir){
+    std::vector<string> vec_files;
+    _listdir(path_dir, vec_files);
+    return vec_files;
+} */
 
 std::vector<string> listdir(const string dirPath)
 {
