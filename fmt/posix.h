@@ -24,7 +24,7 @@
 #  include <xlocale.h>  // for LC_NUMERIC_MASK on OS X
 #endif
 
-#include "format.h"
+#include "fmt/format.h"
 
 // UWP doesn't provide _pipe.
 #if FMT_HAS_INCLUDE("winapifamily.h")

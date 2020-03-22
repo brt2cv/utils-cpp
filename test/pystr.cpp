@@ -1,7 +1,7 @@
 // g++ test/pystr.cpp pystring/pystring.cpp fmt/format.cc --std=c++11
 
-#include "../pystr.h"
-#include "../os.hpp"
+#include "pystr.h"
+#include "os.h"
 
 int main(){
     // 字符串函数

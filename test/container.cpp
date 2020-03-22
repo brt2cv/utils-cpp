@@ -1,5 +1,11 @@
-#include "../pystr.h"
-#include "../stl2.h"
+#include "pystr.h"
+#include "container.h"
+
+#define isEmpty empty
+#define append push_back
+#define pop pop_back
+#define remove_ erase
+#define add insert
 
 void test_array(){
     debug();

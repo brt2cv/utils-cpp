@@ -1,8 +1,5 @@
-#ifndef __UTILS_OS__
-#define __UTILS_OS__
+#include "os.h"
 
-#include "pystr.h"
-// #include "pystring/pystring.h"
 #ifdef WINDOWS
     #include <io.h>
     #include <direct.h>
@@ -12,8 +9,6 @@
 
 // #include <filesystem>
 #include <dirent.h>
-#include <vector>
-
 
 namespace os{
 // using std::filesystem;  // g++ 7.4 尚不支持
@@ -58,8 +53,7 @@ std::vector<string> listdir(string path_dir){
     return vec_files;
 } */
 
-std::vector<string> listdir(const string dirPath)
-{
+std::vector<string> listdir(const string dirPath){
     std::vector<string> filesNameList;
     DIR *dir = opendir(dirPath.c_str());
     dirent *entry = NULL;
@@ -74,5 +68,3 @@ std::vector<string> listdir(const string dirPath)
 }
 
 }  // namespace os
-
-#endif  // __UTILS_OS__

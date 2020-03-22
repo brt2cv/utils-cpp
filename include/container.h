@@ -12,10 +12,6 @@ using Array = std::vector<Args>;
 template <typename Args>
 using Vector = std::vector<Args>;
 
-// #define isEmpty empty
-// #define append push_back
-// #define pop pop_back
-
 /*-----------------------------------------------------------------*\
     List
 \*-----------------------------------------------------------------*/
@@ -53,9 +49,6 @@ using Set = std::set<Args>;
 
 template <typename Args>
 using Multiset = std::multiset<Args>;
-
-// #define remove erase
-// #define add insert
 
 /*-----------------------------------------------------------------*\
     Dict / Multimap
