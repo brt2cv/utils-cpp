@@ -81,8 +81,8 @@ bool FreeLibrary(HMODULE hModule){
 #endif  // _WIN32
 }
 
-static PROC GetProcFromDll(HMODULE hModule, const char* proc_name){
-    return GetProcAddress(hModule, proc_name);
+PROC GetProcFromDll(HMODULE hModule, const char* proc_name){
+    return (PROC)GetProcAddress(hModule, proc_name);
 }
 
 }  // namespace sys

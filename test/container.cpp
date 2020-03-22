@@ -14,7 +14,7 @@ void test_array(){
     array.pop_back();
     array.push_back(5);
     for(auto &i: array){
-        print("%d", i*2);
+        print(i*2);
     }
 }
 
@@ -35,7 +35,7 @@ void test_dict(){
         dict[i] = i*3.14;
     }
     for(auto it = dict.begin(); it != dict.end(); it++){  // std::map<char,int>::iterator
-        print("%d : %f", it->_key, it->_value);
+        print(it->_key, it->_value);
     }
 }
 
@@ -47,7 +47,7 @@ void test_list(){
     list.push_back(5);
     list.remove(2);
     for(auto &i: list){
-        print("%d", i*2);
+        print(i*2);
     }
 }
 

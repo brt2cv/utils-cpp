@@ -1,5 +1,5 @@
+#include "pystr.h"
 #include <stdarg.h>
-#include <stdio.h>
 
 void println(const char *format, ...){
     // printf("%s %s ", __DATE__, __TIME__);
