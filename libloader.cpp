@@ -1,14 +1,14 @@
 #include "pystr.h"
 #include "os.h"
 #include <assert.h>
+#include "libloader.h"
 
 #ifdef _WIN32
     #include <windows.h>
 #else
 #include <dlfcn.h>
-
-// 获取一个应用程序或动态链接库的模块句柄，返回nullptr->失败
-static HMODULE GetModuleHandleA(const char* filename){
+// 获取一个应用程序或动态链接库的模块句柄，失败则返回nullptr
+static HMODULE__ GetModuleHandleA(const char* filename){
     if (!filename) {
         return NULL;
     }
@@ -17,14 +17,14 @@ static HMODULE GetModuleHandleA(const char* filename){
         return _hmod;
     }
 
-    typedef HMODULE (*F)(const char*);
+    typedef HMODULE__ (*F)(const char*);
     F f = (F)GetProcAddress(_manager, "unixFindModule");
 
     return f ? f(filename) : NULL;
 }
 
 // 通过HMODULE句柄获取模块的物理路径(lib/exe)
-void GetModuleFileNameA(HMODULE hmod, char* filename, int size){
+void GetModuleFileNameA(HMODULE__ hmod, char* filename, int size){
     *filename = 0;
     if (!hmod) {
         size_t bytes = readlink("/proc/self/exe", filename, size);
@@ -39,7 +39,7 @@ void GetModuleFileNameA(HMODULE hmod, char* filename, int size){
 }
 
 // 通过HMODULE句柄获取函数指针（句柄）
-static void* GetProcAddress(HMODULE hmod, const char* name){
+static void* GetProcAddress(HMODULE__ hmod, const char* name){
     void* sym = NULL;
     if (hmod) {
         sym = dlsym(hmod, name);
@@ -51,29 +51,33 @@ static void* GetProcAddress(HMODULE hmod, const char* name){
 
 namespace sys{
 
-HMODULE LoadLibrary(const char* path_module){
+HMODULE__ x4LoadLibrary(const char* path_module){
     string path_abs(path_module);
     if (!osp::isabs(path_abs)){
         path_abs = osp::abspath(path_abs, os::getcwd());
     }
-    debug(">> path_abs = %s", path_abs);
+    debug << ">> path_abs = " << path_abs << endl;
+    assert(os::exists(path_abs));
+    debug << "done" << endl;
 
 #ifdef _WIN32
-    HMODULE hModule = ::LoadLibraryExA(path_module, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+    HMODULE__ hModule = ::LoadLibraryExA(path_module, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+    debug << "done" << endl;
+
 #else
-    HMODULE hModule = dlopen(path_module, RTLD_LAZY);
+    HMODULE__ hModule = dlopen(path_module, RTLD_LAZY);
     seterr(dlerror());
 #endif  // _WIN32
 
     return hModule;
 }
 
-bool FreeLibrary(HMODULE hModule){
+bool x4FreeLibrary(HMODULE__ hModule){
     // 执行模块的析构函数
 
     // 系统资源释放
 #ifdef _WIN32
-    return ::FreeLibrary(hModule);
+    return ::FreeLibrary((HMODULE)hModule);
 #else
     int ret = hModule ? dlclose(hModule) : 0;
     seterr(dlerror());
@@ -81,8 +85,12 @@ bool FreeLibrary(HMODULE hModule){
 #endif  // _WIN32
 }
 
-PROC GetProcFromDll(HMODULE hModule, const char* proc_name){
-    return (PROC)GetProcAddress(hModule, proc_name);
+PROC__ x4GetProcFromDll(HMODULE__ hModule, const char* proc_name){
+#ifdef _WIN32
+    return (PROC__)GetProcAddress((HMODULE)hModule, proc_name);
+#else
+    return (PROC__)GetProcAddress(hModule, proc_name);
+#endif
 }
 
 }  // namespace sys

@@ -8,7 +8,7 @@
 #define add insert
 
 void test_array(){
-    debug();
+    debug << endl;
 
     Array<int> array{1,2,3,4};
     array.pop_back();
@@ -19,14 +19,14 @@ void test_array(){
 }
 
 void test_pair(){
-    debug();
+    debug << endl;
 
     Pair<int, const char*> x(502, "胶水");
     println(">> %d - %s", x._key, x._value);
 }
 
 void test_dict(){
-    debug();
+    debug << endl;
 
     Dict<int, float> dict;
     // Map<int, float> dict;
@@ -37,10 +37,14 @@ void test_dict(){
     for(auto it = dict.begin(); it != dict.end(); it++){  // std::map<char,int>::iterator
         print(it->_key, it->_value);
     }
+
+    for(auto item: dict){
+        print(item._key, item._value);
+    }
 }
 
 void test_list(){
-    debug();
+    debug << endl;
 
     List<int> list{1,2,3,4};
     list.pop_back();

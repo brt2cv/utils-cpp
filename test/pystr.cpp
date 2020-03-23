@@ -41,7 +41,7 @@ int main(){
     // 文件IO
     string path_file = "./.gitignore";
     if(!osp::isabs(path_file)){
-        debug("转换为绝对路径");
+        debug << "转换为绝对路径" << endl;
         path_file = osp::abspath(path_file, currdir);
         print(">> abspath: ", path_file);
     }
