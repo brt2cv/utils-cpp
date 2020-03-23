@@ -46,9 +46,15 @@ void print(T arg1, Ts... arg_left){
 
 // #define print(...) printf(##__VA_ARGS__);printf("\n")
 #define prfmt(fmt, ...) printf(fmt"\n", ##__VA_ARGS__)
-// #define debug(...) printf("[DEBUG] " __FILE__"::%s:%d --> " , __FUNCTION__, __LINE__);print(__VA_ARGS__)
-#define debug std::cout<<"[DEBUG] "<<__FILE__<<"::"<<__FUNCTION__<<":"<<__LINE__<<" "
-// Usage: debug << var << endl;
-#define dbgfmt(fmt, ...) printf("[DEBUG] " __FILE__"::%s:%d --> " fmt"\n", __FUNCTION__, __LINE__ , ##__VA_ARGS__)
+
+#ifndef NDEBUG
+    // #define debug(...) printf("[DEBUG] " __FILE__"::%s:%d --> " , __FUNCTION__, __LINE__);print(__VA_ARGS__)
+    #define debug std::cout<<"[DEBUG] "<<__FILE__<<"::"<<__FUNCTION__<<":"<<__LINE__<<" "
+    // Usage: debug << var << endl;
+    #define dbgfmt(fmt, ...) printf("[DEBUG] " __FILE__"::%s:%d --> " fmt"\n", __FUNCTION__, __LINE__ , ##__VA_ARGS__)
+#else
+    #define debug std::cout<<"[DEBUG] "
+    #define dbgfmt(fmt, ...)
+#endif
 
 #endif  // __UTILS_STRING__

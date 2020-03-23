@@ -1,7 +1,8 @@
+#include "libloader.h"
 #include "pystr.h"
 #include "os.h"
+#include "base.h"
 #include <assert.h>
-#include "libloader.h"
 
 #ifdef _WIN32
     #include <windows.h>
@@ -58,11 +59,11 @@ HMODULE__ x4LoadLibrary(const char* path_module){
     }
     debug << ">> path_abs = " << path_abs << endl;
     assert(os::exists(path_abs));
-    debug << "done" << endl;
+    debug << "Find plugin.dll file" << endl;
 
 #ifdef _WIN32
     HMODULE__ hModule = ::LoadLibraryExA(path_module, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-    debug << "done" << endl;
+    debug << var_name(hModule) << ": " << var_type(hModule) << endl;
 
 #else
     HMODULE__ hModule = dlopen(path_module, RTLD_LAZY);
