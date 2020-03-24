@@ -7,7 +7,7 @@ typedef void* PROC__;
 
 namespace sys{
 
-HMODULE__ LoadLibrary(const char* path_module);
+HMODULE__ LoadLibrary_(const char* path_module);
 bool FreeLibrary(HMODULE__ hModule);
 PROC__ GetProcFromDll(HMODULE__ hModule, const char* proc_name);
 

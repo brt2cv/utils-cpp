@@ -62,7 +62,7 @@ static void* GetProcAddress(HMODULE__ hmod, const char* name){
 
 namespace sys{
 
-HMODULE__ LoadLibrary(const char* path_module){
+HMODULE__ LoadLibrary_(const char* path_module){
     string path_abs(path_module);
     if (!osp::isabs(path_abs)){
         path_abs = osp::abspath(path_abs, os::getcwd());
@@ -72,8 +72,6 @@ HMODULE__ LoadLibrary(const char* path_module){
 
 #ifdef _WIN32
     HMODULE__ hModule = ::LoadLibraryExA(path_module, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-    debug << var_name(hModule) << ": " << var_type(hModule) << endl;
-
 #else
     HMODULE__ hModule = dlopen(path_module, RTLD_LAZY);
     _except(dlerror());
