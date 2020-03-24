@@ -1,9 +1,25 @@
 #ifndef __UTILS_BASE__
 #define __UTILS_BASE__
 
+// modules
+#include "pystr.h"
+#include "os.h"
+#include "container.h"
+
 // #define NDEBUG
 #include <assert.h>
 #include <typeinfo>
+
+#define ASSERT(expr, description) \
+    if(!(expr)) std::cout<<description<<std::endl; \
+    assert(expr);
+
+static inline void assert_(int expression, string description){
+    if(!expression){
+        std::cout << description << std::endl;
+    }
+    assert(expression);
+}
 
 #define var_name(x) #x
 // cout << var_name(aInt) << endl;  // 输出: aInt

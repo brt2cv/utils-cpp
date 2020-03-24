@@ -27,6 +27,7 @@ using List = std::list<Args>;
 
 template <typename Arg1, typename Arg2>
 using Pair = std::pair<Arg1, Arg2>;
+using std::make_pair;
 
 #define _key first
 #define _value second

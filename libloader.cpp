@@ -1,13 +1,11 @@
 #include "libloader.h"
-#include "pystr.h"
-#include "os.h"
-#include "base.h"
-#include <assert.h>
+#include "utils.h"
 
 #ifdef _WIN32
     #include <windows.h>
 #else
 #include <dlfcn.h>
+/*
 // 获取一个应用程序或动态链接库的模块句柄，失败则返回nullptr
 static HMODULE__ GetModuleHandleA(const char* filename){
     if (!filename) {
@@ -38,13 +36,22 @@ void GetModuleFileNameA(HMODULE__ hmod, char* filename, int size){
         if (f) f(filename, size);
     }
 }
+*/
+
+static inline void _except(const char* err){
+    if(err){
+        debug << "module载入失败: " << err << endl;
+        exit(1);
+    }
+    assert(err == nullptr);
+}
 
 // 通过HMODULE句柄获取函数指针（句柄）
 static void* GetProcAddress(HMODULE__ hmod, const char* name){
     void* sym = NULL;
     if (hmod) {
         sym = dlsym(hmod, name);
-        seterr(dlerror());
+        _except(dlerror());
     }
     return sym;
 }
@@ -67,7 +74,7 @@ HMODULE__ x4LoadLibrary(const char* path_module){
 
 #else
     HMODULE__ hModule = dlopen(path_module, RTLD_LAZY);
-    seterr(dlerror());
+    _except(dlerror());
 #endif  // _WIN32
 
     return hModule;
@@ -81,7 +88,7 @@ bool x4FreeLibrary(HMODULE__ hModule){
     return ::FreeLibrary((HMODULE)hModule);
 #else
     int ret = hModule ? dlclose(hModule) : 0;
-    seterr(dlerror());
+    _except(dlerror());
     return 0 == ret;
 #endif  // _WIN32
 }
