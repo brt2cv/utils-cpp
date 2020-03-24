@@ -1,6 +1,8 @@
 #ifndef __UTILS_CONTAINER__
 #define __UTILS_CONTAINER__
 
+#define IN(item,collection) (collection.find(item) != collection.end())
+
 /*-----------------------------------------------------------------*\
     Array
 \*-----------------------------------------------------------------*/

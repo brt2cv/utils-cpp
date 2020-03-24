@@ -10,16 +10,9 @@
 #include <assert.h>
 #include <typeinfo>
 
-#define ASSERT(expr, description) \
+#define assert_(expr, description) \
     if(!(expr)) std::cout<<description<<std::endl; \
     assert(expr);
-
-static inline void assert_(int expression, string description){
-    if(!expression){
-        std::cout << description << std::endl;
-    }
-    assert(expression);
-}
 
 #define var_name(x) #x
 // cout << var_name(aInt) << endl;  // 输出: aInt

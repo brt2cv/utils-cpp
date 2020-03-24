@@ -1,5 +1,8 @@
 #include "libloader.h"
-#include "utils.h"
+// #include "utils.h"
+#include "os.h"
+#include "pystr.h"
+#include <assert.h>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -59,14 +62,13 @@ static void* GetProcAddress(HMODULE__ hmod, const char* name){
 
 namespace sys{
 
-HMODULE__ x4LoadLibrary(const char* path_module){
+HMODULE__ LoadLibrary(const char* path_module){
     string path_abs(path_module);
     if (!osp::isabs(path_abs)){
         path_abs = osp::abspath(path_abs, os::getcwd());
     }
-    debug << ">> path_abs = " << path_abs << endl;
+    // auto msg_assert = strfmt("无法访问的路径:【{}】", path_abs);
     assert(os::exists(path_abs));
-    debug << "Find plugin.dll file" << endl;
 
 #ifdef _WIN32
     HMODULE__ hModule = ::LoadLibraryExA(path_module, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -80,7 +82,7 @@ HMODULE__ x4LoadLibrary(const char* path_module){
     return hModule;
 }
 
-bool x4FreeLibrary(HMODULE__ hModule){
+bool FreeLibrary(HMODULE__ hModule){
     // 执行模块的析构函数
 
     // 系统资源释放
@@ -93,7 +95,7 @@ bool x4FreeLibrary(HMODULE__ hModule){
 #endif  // _WIN32
 }
 
-PROC__ x4GetProcFromDll(HMODULE__ hModule, const char* proc_name){
+PROC__ GetProcFromDll(HMODULE__ hModule, const char* proc_name){
 #ifdef _WIN32
     return (PROC__)GetProcAddress((HMODULE)hModule, proc_name);
 #else
