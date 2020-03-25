@@ -3,16 +3,25 @@ project(tmv_utils)
 message(">> 正在编译tmv_utils模块...")
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    # add_compile_options(-std=c++11)
     message(">> 使用g++编译器")
-    set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -W -Wall")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+    # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11")
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11")
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -W -Wall")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+add_compile_options(-fPIC)
+
+if(WIN32)
+    message(STATUS "Now is windows")
+elseif(APPLE)
+    message(STATUS "Now is Apple systens.")
+elseif(UNIX)
+    message(STATUS "Now is UNIX-like OS's.")
+endif()
 
 # Determine if fmt is built as a subproject (using add_subdirectory)
 # or if it is the master project.
