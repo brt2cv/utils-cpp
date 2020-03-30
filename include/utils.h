@@ -1,6 +1,21 @@
 #ifndef __UTILS_BASE__
 #define __UTILS_BASE__
 
+// compiler
+
+#if (__cplusplus > 201402L || defined(_LIBCPP_VERSION)) || \
+    (defined(_MSVC_LANG) && _MSVC_LANG > 201402L && _MSC_VER >= 1910)
+    #define __STD_CPP17__
+#endif
+
+#if (__cplusplus > 201103L) || (defined(_MSVC_LANG) && _MSVC_LANG > 201103L)
+    #define __STD_CPP14__
+#endif
+
+#if (__cplusplus > 199711L) || (defined(_MSVC_LANG) && _MSVC_LANG > 199711L)
+    #define __STD_CPP11__
+#endif
+
 // modules
 #include "pystr.h"
 #include "os.h"
