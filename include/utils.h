@@ -29,12 +29,10 @@
     if(!(expr)) std::cout<<description<<std::endl; \
     assert(expr);
 
+#define typeof_ decltype
 #define var_name(x) #x
 // cout << var_name(aInt) << endl;  // 输出: aInt
 #define var_type(x) typeid(x).name()
-
-// Macro-Define
-#define pass
 
 /*
 // __attribute__
