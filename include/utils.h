@@ -25,23 +25,43 @@
 #include <assert.h>
 #include <typeinfo>
 
-// #define Assert(expr, description) \
-//     if(!(expr)) std::cout<<description<<std::endl; \
-//     assert(expr);
-
-// #define TypeOf decltype
-// #define VarName(x) #x
-// // cout << var_name(aInt) << endl;  // 输出: aInt
-// #define VarType(x) typeid(x).name()
-
-#define assert_(expr, description) \
-    if(!(expr)) std::cout<<description<<std::endl; \
+#define Assert(expr, description) \
+    if(!(expr)) std::cout<<"AssertError --> "<<description<<std::endl; \
     assert(expr);
 
-#define typeof_ decltype
-#define var_name(x) #x
+#define TypeOf decltype
+
+#define Var_name(x) #x
 // cout << var_name(aInt) << endl;  // 输出: aInt
-#define var_type(x) typeid(x).name()
+#define Var_type(x) typeid(x).name()
+
+template<typename T>
+void logging(int level, T arg){
+    switch (level){
+        case 10:
+            std::cout<<">>> "<< arg << std::endl;
+            break;
+        case 20:
+            std::cout<<"[+] "<< arg << std::endl;
+            break;
+        case 30:
+            std::cout<<"[-] "<< arg << std::endl;
+            break;
+        case 40:
+            std::cout<<"[!] "<< arg << std::endl;
+            break;
+        default:
+            break;
+    }
+}
+
+#define Log_debug(x) logging(10,x);
+
+#define Log_info(x) logging(20,x);
+
+#define Log_warning(x) logging(30,x);
+
+#define Log_error(x) logging(40,x);
 
 /*
 // __attribute__

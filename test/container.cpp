@@ -48,7 +48,7 @@ void test_tuple(){
     debug << "遍历Tuple:" << endl;
     for(auto i=0; i != len_tuple(tuple); i++){
         auto item = tuple_at(tuple, i);
-        print(">>", item, var_type(item));
+        print(">>", item, Var_type(item));
         // 以下内容将编译失败，fmt不能识别item的类型（且不支持强转）
         // print(strfmt("index {} is: {}", i, item));
     }
@@ -77,7 +77,7 @@ void test_set(){
     debug << endl;
 
     Set<int> set{1,2,3,4};
-    debug << "Type of 'Set' is: " << var_type(set) << endl;
+    debug << "Type of 'Set' is: " << Var_type(set) << endl;
 
     auto item = 9;
     string has_item = "in";

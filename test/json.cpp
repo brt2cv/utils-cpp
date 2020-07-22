@@ -18,7 +18,7 @@ int main(){
     }
     )"_json;
 
-    print(var_type(struct_json));
+    print(Var_type(struct_json));
     // 修改参数
     struct_json["happy"] = false;
     struct_json["pi"] = "哇，可以直接改变类型？动态语法了都……";
@@ -28,7 +28,7 @@ int main(){
     std::ofstream o("pretty.json");
     o << std::setw(4) << struct_json << std::endl;
 
-    assert_(os::exists(path_demofile), strfmt("不存在文件【{}】", path_demofile))
+    Assert(os::exists(path_demofile), strfmt("不存在文件【{}】", path_demofile))
     std::ifstream i(path_demofile);
     json j;
     i >> j;
