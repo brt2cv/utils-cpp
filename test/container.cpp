@@ -44,16 +44,23 @@ void test_tuple(){
 
     auto tuple = make_tuple("Jenny", false, 18, 168.25);
 #ifdef __STD_CPP17__
-    print(strfmt("{}的年龄是【{}】，身高【{}】", tuple_index(tuple, 0),
-                 tuple_index(tuple, 2), tuple_index(tuple, 3)));
+    // tuple_at() 支持动态传入index，但返回的类型比较特殊
     debug << "遍历Tuple:" << endl;
-    for(auto i=0; i != tuple_len(tuple), i++){
-        print(i);
+    for(auto i=0; i != tuple_len(tuple); i++){
+        auto item = tuple_at(tuple, i);
+        print(">>", item, var_type(item));
+        // 以下内容将编译失败，fmt不能识别item的类型（且不支持强转）
+        // print(strfmt("index {} is: {}", i, item));
     }
+    print(strfmt("{}的年龄是【{}】，身高【{}】",
+                 get<0>(tuple),  // 不支持: tuple_at(tuple, 0)
+                 get<2>(tuple),
+                 get<3>(tuple)));
 #else
     int len_tuple = tuple_size<decltype(tuple)>::value;
     string a; bool b; int c; float d;
     tie(a, b, c, d) = tuple;
+    // get<i>(tuple) 只支持静态编译，即i只能为常量
     print(strfmt("Tuple对象的长度为【{}】，元素1【{}】，元素2【{}】，元素3【{}】",
                  len_tuple, get<0>(tuple), b, c));
 #endif

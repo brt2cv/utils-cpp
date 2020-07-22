@@ -143,7 +143,7 @@ constexpr std::variant<T...> _tuple_index(const std::tuple<T...>& tpl, size_t i)
 }
 
 template <typename... T>
-constexpr std::variant<T...> tuple_index(const std::tuple<T...>& tpl, size_t i) {
+constexpr std::variant<T...> tuple_at(const std::tuple<T...>& tpl, size_t i) {
     return _tuple_index<0>(tpl, i);
 }
 
@@ -151,11 +151,6 @@ template <typename T0, typename ... Ts>
 std::ostream & operator<< (std::ostream & s, std::variant<T0, Ts...> const & v) {
     std::visit([&](auto && x){ s << x;}, v);
     return s;
-}
-
-template <typename... T>
-constexpr std::variant<T...> tuple_at(const std::tuple<T...>& tpl, size_t i) {
-    return tuple_index(tpl, i);
 }
 
 // So, we can...
