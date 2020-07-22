@@ -25,6 +25,15 @@
 #include <assert.h>
 #include <typeinfo>
 
+// #define Assert(expr, description) \
+//     if(!(expr)) std::cout<<description<<std::endl; \
+//     assert(expr);
+
+// #define TypeOf decltype
+// #define VarName(x) #x
+// // cout << var_name(aInt) << endl;  // 输出: aInt
+// #define VarType(x) typeid(x).name()
+
 #define assert_(expr, description) \
     if(!(expr)) std::cout<<description<<std::endl; \
     assert(expr);

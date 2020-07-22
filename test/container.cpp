@@ -1,8 +1,8 @@
 #include "utils.h"
 
 #define isEmpty empty
-#define append push_back
-#define pop pop_back
+// #define append push_back
+// #define pop pop_back
 #define remove_ erase
 #define add insert
 
@@ -11,16 +11,16 @@ void test_vector(){
 
     Vector<int> vector{1,2,3,4};
     // vector.pop_back();
-    list_pop(vector);
+    pop(vector);
     // vector.push_back(5);
-    list_append(vector, 5);
+    append(vector, 5);
     for(auto &i: vector){
         print(i*2);
     }
 
     auto item = 3;
     string is_in;
-    if(in_list(3, vector))  is_in = "is";
+    if(in_vector(3, vector))  is_in = "is";
     else  is_in = "is not";
     print(strfmt("Item 【{}】 {} in collection.", item, is_in));
     print(strfmt("Item 【{}】 index is {}.", item, list_index(vector, item)));
@@ -46,7 +46,7 @@ void test_tuple(){
 #ifdef __STD_CPP17__
     // tuple_at() 支持动态传入index，但返回的类型比较特殊
     debug << "遍历Tuple:" << endl;
-    for(auto i=0; i != tuple_len(tuple); i++){
+    for(auto i=0; i != len_tuple(tuple); i++){
         auto item = tuple_at(tuple, i);
         print(">>", item, var_type(item));
         // 以下内容将编译失败，fmt不能识别item的类型（且不支持强转）

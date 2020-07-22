@@ -1,0 +1,6 @@
+{
+    "hello": {
+        "world": "Try to read key of 'Hi'",
+        "hi": "原来是中文"
+    }
+}

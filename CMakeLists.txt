@@ -40,14 +40,17 @@ include_directories(include)
 
 add_subdirectory(fmt)
 add_subdirectory(pystring)
+# set(JSON_BuildTests OFF CACHE INTERNAL "")
+# add_subdirectory(nlohmann_json)
 aux_source_directory(. DIR_UTILS)
-add_library(utils SHARED ${DIR_UTILS})
+add_library(utils SHARED ${DIR_UTILS} nlohmann_json)
 
 # IF( CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" )
 # SET_TARGET_PROPERTIES(utils PROPERTIES COMPILE_FLAGS "-fPIC")
 # ENDIF( CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" )
 
-target_link_libraries(utils fmtlib pystring)
+target_link_libraries(utils
+    PUBLIC fmtlib pystring)
 if(WIN32)
     target_link_libraries(utils kernel32.lib)
 elseif(UNIX)

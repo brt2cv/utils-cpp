@@ -3,8 +3,8 @@
 
 // #define IN(item,collection) (collection.find(item) != collection.end())
 // #define set_add(va_set,item)
-#define data_append(va_list,item) va_list.push_back(item)
-#define data_pop(va_list) va_list.pop_back()
+// #define data_append(va_list,item) va_list.push_back(item)
+// #define data_pop(va_list) va_list.pop_back()
 
 /*-----------------------------------------------------------------*\
     Array
@@ -18,18 +18,40 @@ using Array = std::array<Arg1, size>;
 template <typename Args>
 using Vector = std::vector<Args>;
 
+/**
+ * @brief 匹配Golang标准库: 适用于Vector的push_back
+ *
+ * @tparam T
+ * @param va_vector
+ * @param item
+ */
 template <typename T>
-void list_append(std::vector<T> va_list, T item){
-    va_list.push_back(item);
+void append(std::vector<T> va_vector, T item){
+    va_vector.push_back(item);
 }
 
+/**
+ * @brief alias for vector.pop_back()
+ *
+ * @tparam T
+ * @param va_list
+ */
 template <typename T>
-void list_pop(std::vector<T> va_list){
+void pop(std::vector<T> va_list){
     va_list.pop_back();
 }
 
+/**
+ * @brief 匹配Python语法: 判断元素的存在性
+ *
+ * @tparam T
+ * @param target
+ * @param va_list
+ * @return true
+ * @return false
+ */
 template <typename T>
-bool in_list(T target, std::vector<T> va_list){
+bool in_vector(T target, std::vector<T> va_list){
     // for(auto iter=va_list.begin(), iter != va_list.end(), iter++){
     //     if(*iter == item)
     for(auto item: va_list){
@@ -159,7 +181,7 @@ std::ostream & operator<< (std::ostream & s, std::variant<T0, Ts...> const & v) 
 
 // 元祖遍历
 template <typename T>
-auto tuple_len(T &tpl) {
+auto len_tuple(T &tpl) {
     return std::tuple_size<T>::value;
 }
 

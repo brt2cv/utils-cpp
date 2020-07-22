@@ -6,3 +6,6 @@ target_link_libraries(container utils)
 
 add_executable(pystr pystr.cpp)
 target_link_libraries(pystr utils)
+
+add_executable(json json.cpp)
+target_link_libraries(json utils)
