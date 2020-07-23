@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
-project(tmv_utils)
+# CMake versions < 3.4.0 do not support try_compile/pthread checks without C as active language.
+if(CMAKE_VERSION VERSION_LESS 3.4.0)
+  project(tmv_utils)
+else()
+  project(tmv_utils CXX)
+endif()
 message(">> 正在编译tmv_utils模块...")
 
 if(CMAKE_COMPILER_IS_GNUCXX)
@@ -26,7 +31,7 @@ endif()
 # Determine if fmt is built as a subproject (using add_subdirectory)
 # or if it is the master project.
 set(MASTER_PROJECT OFF)
-if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   set(MASTER_PROJECT ON)
   message(STATUS "CMake version: ${CMAKE_VERSION}")
 endif()
@@ -40,8 +45,18 @@ include_directories(include)
 
 add_subdirectory(fmt)
 add_subdirectory(pystring)
-# set(JSON_BuildTests OFF CACHE INTERNAL "")
-# add_subdirectory(nlohmann_json)
+
+# 编译pybin11
+find_package(Python3 COMPONENTS Development)
+if(Python3_Development_FOUND)
+    message("=============== Python3_Development Found ===============")
+    include_directories(${Python3_INCLUDE_DIRS})
+    # find_package(pybind11 REQUIRED)
+    add_subdirectory(pybind11)
+else()
+    message(SEND_ERROR "!!!!!!!!!!!!!!! Python3_Development NOT Found, 可能导致pybind11调用失败 !!!!!!!!!!!!!!!")
+endif()
+
 aux_source_directory(. DIR_UTILS)
 add_library(utils SHARED ${DIR_UTILS} nlohmann_json)
 

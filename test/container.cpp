@@ -70,7 +70,7 @@ void test_pair(){
     debug << endl;
 
     Pair<int, const char*> x(502, "胶水");
-    println(">> %d - %s", x._key, x._value);
+    println(">> %d - %s", x.Key, x.Value);
 }
 
 void test_set(){
@@ -100,11 +100,11 @@ void test_dict(){
         dict[i] = i*3.14;
     }
     for(auto it = dict.begin(); it != dict.end(); it++){  // std::map<char,int>::iterator
-        print(it->_key, it->_value);
+        print(it->Key, it->Value);
     }
 
     for(auto item: dict){
-        print(item._key, item._value);
+        print(item.Key, item.Value);
     }
 }
 

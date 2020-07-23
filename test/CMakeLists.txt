@@ -9,3 +9,6 @@ target_link_libraries(pystr utils)
 
 add_executable(json json.cpp)
 target_link_libraries(json utils)
+
+add_executable(pybind pybind11.cpp)
+target_link_libraries(pybind utils pybind11::embed)
