@@ -12,3 +12,7 @@ target_link_libraries(json utils)
 
 add_executable(pybind pybind11.cpp)
 target_link_libraries(pybind utils pybind11::embed)
+
+find_package(nng)
+add_executable(nngpp nngpp.cpp)
+target_link_libraries(nngpp nng)
