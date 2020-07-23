@@ -1,5 +1,4 @@
 add_executable(base base.cpp)
-# target_link_libraries(base utils)  # 未调用libutils，但写上也没错
 
 add_executable(container container.cpp)
 target_link_libraries(container utils)
@@ -16,3 +15,5 @@ target_link_libraries(pybind utils pybind11::embed)
 find_package(nng)
 add_executable(nngpp nngpp.cpp)
 target_link_libraries(nngpp nng)
+
+add_executable(spdlog spdlog.cpp)
